@@ -1,0 +1,29 @@
+问题：
+====
+Errors in parsing headers:
+1. <severity = Warning,
+    location = <SourceLocation file None, line 179, column 9>,
+    details = "'__WCHAR_MAX__' macro redefined">
+2. <severity = Fatal,
+    location = <SourceLocation file '.../android-ndk-r9b/plateforms/android-14/arch-arm/usr/include\\sys/types.h', line 33, column 10>,
+    details = "'stddef.h' file not found">
+====
+
+说明：1.是警告可以忽略，主要解决错误2.
+
+尝试解决方案：
+1.修改plateform, 试用了15，19.
+2.改成用android-ndk-r9d, 然后再试几个plateforms版本
+3.当前python版本是2.7.9，教程说是用2.7.3，于是安装了2.7.3的，命令python -V， 结果显示2.7.9, 于是又安装了2.7.4的，结果还是2.7.9,真真无语。
+4.发现test.ini line12 simple_test_headers = -I%(cxxgeneratordir)s/test/simple_tes 最后少了个t，不改也不影响（亲测，不明原因）。
+
+最终解决方法：
+打开test.bat文件，11和12行
+set LLVM="%NDK_ROOT%/toolchains/llvm-3.3/prebuilt/"
+if not exist "%NDK_ROOT%/toolchains/llvm-3.3/prebuilt/" set LLVM="%NDK_ROOT%/toolchains/llvm-3.4/prebuilt/"
+
+将""都删掉，变成
+set LLVM=%NDK_ROOT%/toolchains/llvm-3.3/prebuilt/
+if not exist %NDK_ROOT%/toolchains/llvm-3.3/prebuilt/ set LLVM=%NDK_ROOT%/toolchains/llvm-3.4/prebuilt/
+
+运行test.bat成功。
