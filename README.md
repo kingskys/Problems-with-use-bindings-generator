@@ -32,3 +32,16 @@ pause
 3.检查mk是否正确。
 
 
+mk命令理解
+===
+LOCAL_EXPORT_C_INCLUDES 暴露本包的一些头文件地址。
+=
+（LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/include）引用本包，可以看到include的里面的头文件。 默认是mk所在地址。
+
+遍历文件目录及子目录下的文件
+=
+LIB_SOURCES := $(LOCAL_PATH)/Sources
+
+CLASSES_FILES := $(wildcard $(LIB_SOURCES)/*.cpp)
+
+LOCAL_SRC_FILES := $(CLASSES_FILES:$(LOCAL_PATH)/%=%)
