@@ -22,7 +22,9 @@ pause
 2.需要进入genbindings.py所在路径再执行命令（读取ini文件时，只使用的文件名，未加路径）。
 
 问题：在player上运行正常，打成apk就不行了
-===
+=== 
+(当前的apk包也可以再eclipse中看log).
+
 1.检查是否引入mk文件，引入的是LOCAL_MODULE 一般名字以 _static 结尾
 
 2.添加注册模块，即导出的tolua。 在项目中使用的与在player中不是同一个，需要再添加一次。（一般在Classes文件夹里的某个文件，3.3是lua_module_register.h）
