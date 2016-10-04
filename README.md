@@ -45,3 +45,10 @@ LIB_SOURCES := $(LOCAL_PATH)/Sources
 CLASSES_FILES := $(wildcard $(LIB_SOURCES)/*.cpp)
 
 LOCAL_SRC_FILES := $(CLASSES_FILES:$(LOCAL_PATH)/%=%)
+
+$(call import-module,.)的基础路径是NDK_MODULE_PATH，是一个ndk的变量，在打包的脚本中可以找到。
+=
+LOCAL_PATH := $(call my-dir) 是当前mk所在路径。
+=
+
+
